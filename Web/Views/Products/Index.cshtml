@@ -1,0 +1,156 @@
+﻿@model ShopProductViewModel
+@{
+}
+
+<div id="productText">
+    <h1>Product List</h1>
+</div>
+
+
+<div id="shopArea">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="shopCat">
+                    <h5 class="toph4">Shop By Categories</h5>
+                    @*<ul class="ulprice">
+            <li class="liname">
+                <p>Price</p>
+            </li>
+            <li>
+                <a href="">
+                    <input class="inputRad" type="radio" checked name="radio">
+                    <p>All</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <input class="inputRad" type="radio" name="radio">
+                    <p>0$ - 10$</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <input class="inputRad" type="radio" name="radio">
+                    <p>10$ - 20$</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <input class="inputRad" type="radio" name="radio">
+                    <p>20$ - 40$</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <input class="inputRad" type="radio" name="radio">
+                    <p>40$ - 60$</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <input class="inputRad" type="radio" name="radio">
+                    <p>60$ - 100$</p>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <input class="inputRad" type="radio" name="radio">
+                    <p>100$ +</p>
+                </a>
+            </li>
+        </ul>*@
+                    <ul class="ulCat">
+                        <li class="liname">
+                            <p>Catagories</p>
+                        </li>
+                        <li>
+                            <a href="/Products">
+                                <p>All</p>
+                            </a>
+                        </li>
+                        @foreach (var category in Model.Categories)
+                        {
+                            <li>
+                                <a href="/Products/Index/@category.ID">
+                                    @*<input class="inputRadct" type="radio" name="radioct">*@
+                                    <p>@category.Name</p>
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+
+                        <select name="sortBy" id="sortBy" class="form-control">
+                            <option value="">Default</option>
+                            <option value="@(Convert.ToInt32(SortByEnom.PriceHightoLow))">Price High to Low</option>
+                            <option value="@(Convert.ToInt32(SortByEnom.PriceLowtoHigh))">PriceLowtoHigh</option>
+                            <option value="0">Latest</option>
+                        </select>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="shopPro">
+                    <div class="shopPro-top">
+                        <div class="col-lg-4 results">
+                            <p>Showing <a href="">9</a> of <a href="">30</a> results</p>
+                        </div>
+                        <div class="col-lg-8 srch">
+                            <form class="d-flex">
+                                <input class="inpsrc" name="search" type="text" placeholder="Search item">
+                                <input class="btn" type="submit" value="Search">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="shopPro-bottom">
+                        <div class="row productList">
+
+                            @foreach (var pro in Model.Products)
+                            {
+                                Picture coverImage = PictureHelper.GetCoverImage(pro.ProductPictures, pro.ThumbnailPictureID);
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                            <div class="item">
+                                <div class="imgandbutton">
+                                    <a class="pointer:cursor" href="/Products/Detail/@pro.ID"><img class="img-fluid" src="~/uploads/@coverImage.URL" alt=""></a>
+                                    <input class="btn" type="submit" value="Add to Cart">
+                                </div>
+                                <div class="text">
+                                    <h6>@pro.Name</h6>
+                                    <p><span>$</span>@pro.Price</p>
+                                </div>
+                            </div>
+                        </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="pag">
+                        <ul>
+                            <li class="pagli"><a href="#">Previous</a></li>
+                            <li class="pagli"><a class="active" href="#">1</a></li>
+                            <li class="pagli"><a href="#">2</a></li>
+                            <li class="pagli"><a href="#">3</a></li>
+                            <li class="pagli"><a href="#">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+        $("#sortBy").on("change", function () {
+            let sortBy = Number($(this).val())
+            $.ajax({
+                url: '/Products/SearchProduct',
+                data: { sortBy },
+                success: function (res) {
+                    console.log(res)
+                    $(".productList").html(res)
+                }
+            })
+        })
+    </script>
+}

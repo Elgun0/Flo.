@@ -1,0 +1,16 @@
+﻿@foreach (var pro in Model.Products)
+{
+    Picture coverImage = PictureHelper.GetCoverImage(pro.ProductPictures, pro.ThumbnailPictureID);
+    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+        <div class="item">
+            <div class="imgandbutton">
+                <a class="pointer:cursor" href="/Products/Detail/@pro.ID"><img class="img-fluid" src="~/uploads/@coverImage.URL" alt=""></a>
+                <input class="btn" type="submit" value="Add to Cart">
+            </div>
+            <div class="text">
+                <h6>@pro.Name</h6>
+                <p><span>$</span>@pro.Price</p>
+            </div>
+        </div>
+    </div>
+}

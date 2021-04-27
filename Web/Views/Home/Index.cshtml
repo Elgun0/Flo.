@@ -1,0 +1,174 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model ProductViewModel
+
+<!-- Main Slider Area Start-->
+
+<div class="slider">
+    <div class="sliderbck"></div>
+    <ul>
+        <li>
+            <img src="photo/h2-slide-2.jpg" alt="">
+            <div class="text"><h1>For Mother's Day!</h1></div>
+            <div class="textp">
+                <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium nobis error cupiditate.Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                </p>
+            </div>
+            <div class="textbtn">
+                <a href="shop.html"><input class="btn" type="submit" name="" id="" value="Shop Now"></a>
+            </div>
+        </li>
+        <li>
+            <img src="photo/h2-slide-3.jpg" alt="">
+            <div class="text"><h1>For Valentine's Day!</h1></div>
+            <div class="textp">
+                <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium nobis error cupiditate.Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                </p>
+            </div>
+            <div class="textbtn">
+                <a href="shop.html"><input class="btn" type="submit" name="" id="" value="Shop Now"></a>
+            </div>
+        </li>
+        <li>
+            <img src="photo/slider-1.jpg" alt="">
+            <div class="text"><h1>For Wedding Anniversary!</h1></div>
+            <div class="textp">
+                <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium nobis error cupiditate.Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                </p>
+            </div>
+            <div class="textbtn">
+                <a href="shop.html"><input class="btn" type="submit" name="" id="" value="Shop Now"></a>
+            </div>
+        </li>
+        <li>
+            <img src="photo/slider1.jpg" alt="">
+            <div class="text"><h1>For Brithday!</h1></div>
+            <div class="textp">
+                <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium nobis error cupiditate.Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                </p>
+            </div>
+            <div class="textbtn">
+                <a href="shop.html"><input class="btn" type="submit" name="" id="" value="Shop Now"></a>
+            </div>
+        </li>
+    </ul>
+    <div id="next">
+        <i class="fas fa-chevron-right fa-2x"></i>
+    </div>
+    <div id="prev">
+        <i class="fas fa-chevron-left fa-2x"></i>
+    </div>
+</div>
+
+<!-- Main Slider Area End -->
+<!-- Feature start -->
+
+<div id="feature">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="banner">
+                    <i class="fas fa-dolly-flatbed fa-2x"></i>
+                    <div class="line"></div>
+                    <div class="text">
+                        <h6>Free Shipping</h6>
+                        <p>On all orders over $49.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="banner">
+                    <i class="fas fa-money-check fa-2x"></i>
+                    <div class="line"></div>
+                    <div class="text">
+                        <h6>Safe Payment</h6>
+                        <p>your money is protected</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="banner">
+                    <i class="fas fa-money-bill-wave fa-2x"></i>
+                    <div class="line"></div>
+                    <div class="text">
+                        <h6>15 days returns</h6>
+                        <p>Moneyback guarantee</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Feature end -->
+<!-- Spot Area start -->
+
+<div id="spot">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 text">
+                <h1 class="difh">Wonderful Gift</h1>
+                <h1>A PERFECT SPOT</h1>
+                <p>
+                    Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibe ndum auctor, nisi elit conse quat ipsu. Proin gravida nibh vel velit auctor ali quet. Aen ean sol lici tudin, lorem quis biben dum au.
+                </p>
+                <input class="btn" type="submit" value="READ MORE">
+            </div>
+            <div class="col-lg-6 image">
+                <img class="img-fluid" src="photo/h2-img-1.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Spot Area end -->
+<!-- Product Area start -->
+
+<div id="product-area">
+    <div class="container">
+        <div class="toptext">
+            <h1>New Arrival Items</h1>
+        </div>
+        <div class="row">
+            @foreach (var pro in Model.Products)
+            {
+                Picture coverImage = PictureHelper.GetCoverImage(pro.ProductPictures,pro.ThumbnailPictureID);
+                <div class="item col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="imgandbutton">
+                        <a class="pointer:cursor" href="/Products/Detail/@pro.ID"><img class="img-fluid" src="~/uploads/@coverImage.URL" alt=""></a>
+                        <input class="btn" type="submit" value="Add to Cart">
+                    </div>
+                    <div class="text">
+                        <h6>@pro.Name</h6>  
+                        <p><span>$</span>@pro.Price</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Product Area end -->
+<!-- Email Area start -->
+<div id="email_area">
+    <div class="container">
+        <div class="row">
+            <div class="text">
+                <h1>Send Us An E-mail!</h1>
+            </div>
+            <div class="myemail">
+                <input type="text" placeholder="Your E-mail Address">
+            </div>
+            <div class="btninput">
+                <a href="contact.html"><input class="btn" type="submit" value="Send Message"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Email Area end -->
